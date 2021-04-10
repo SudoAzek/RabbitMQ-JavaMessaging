@@ -7,15 +7,16 @@ import com.rabbitmq.client.ConnectionFactory;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-public class DirectPublisher {
+public class TopicPublisher {
     public static void main(String[] args) throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
-        String message = "This is TV";
+        String message = "Message for Mobile and AC";
 
-        channel.basicPublish("Direct-Exchange", "tv", null, message.getBytes());
+        channel.basicPublish("Topic-Exchange", "tv.mobile.ac", null, message.getBytes());
+
         channel.close();
         connection.close();
     }
